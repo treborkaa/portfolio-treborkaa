@@ -1,0 +1,56 @@
+.menu {
+	font-family: fantasy;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: 16px 0;
+
+	&.desktop {
+		height: 2em;
+	}
+
+	&.mobile {
+		height: 5em;
+	}
+}
+
+.navbar {
+	display: flex;
+	flex-direction: row;
+	list-style: none;
+	justify-content: space-around;
+	padding: 0;
+	margin: 0;
+
+	li {
+		cursor: pointer;
+		width: 100%;
+		text-align: center;
+		color: black;
+		transition: color 0.1s ease-out;
+
+		&.active {
+			color: orange;
+		}
+	}
+}
+
+.burger-menu-button {
+	height: 5em;
+	width: 5em;
+	margin-left: auto;
+	border-radius: 50%;
+	z-index: 3;
+}
+
+.burger-modal-displayed {
+	opacity: 1;
+	visibility: visible;
+	transition: opacity 0.5s;
+}
+
+.burger-modal-disabled {
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.5s, visibility 0s 0.5s;
+}

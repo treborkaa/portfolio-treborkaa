@@ -1,0 +1,34 @@
+.fullscreen {
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	z-index: 2;
+	background-color: red;
+
+	.navbar {
+		display: flex;
+		flex-direction: column;
+		list-style: none;
+		height: 90%;
+		padding: 0;
+		font-size: xxx-large;
+
+		li {
+			display: flex;
+			cursor: pointer;
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			color: black;
+			transition: color 0.1s ease-out;
+			align-items: center;
+			justify-content: center;
+
+			&.active {
+				color: orange;
+			}
+		}
+	}
+}

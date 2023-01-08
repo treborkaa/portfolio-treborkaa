@@ -1,0 +1,34 @@
+<div class="fullscreen">
+	<ul class="navbar">
+		<li
+			(click)="navigateTo('/home')"
+			[ngClass]="{ active: this.activeRoute === '/home' }"
+		>
+			Accueil
+		</li>
+		<li
+			(click)="navigateTo('/news')"
+			[ngClass]="{ active: this.activeRoute === '/news' }"
+		>
+			Actus
+		</li>
+		<li
+			(click)="navigateTo('/galery')"
+			[ngClass]="{ active: this.activeRoute === '/galery' }"
+		>
+			Galerie
+		</li>
+		<li
+			(click)="navigateTo('/about')"
+			[ngClass]="{ active: this.activeRoute === '/about' }"
+		>
+			Bio
+		</li>
+		<li
+			(click)="navigateTo('/contact')"
+			[ngClass]="{ active: this.activeRoute === '/contact' }"
+		>
+			Contact
+		</li>
+	</ul>
+</div>
