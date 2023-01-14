@@ -1,1 +1,40 @@
-<p>galery works!</p>
+<select [(ngModel)]="selectedCategory">
+	<option *ngFor="let category of categoryList" [ngValue]="category">
+		{{ category.label }}
+	</option>
+</select>
+<div class="container">
+	<ul class="image-gallery">
+		<li
+			*ngFor="let img of formattedImageList.slice(0, nbItemsLoaded)"
+			[ngStyle]="{
+				display:
+					selectedCategory.tag === '' || img.tags.includes(selectedCategory.tag)
+						? 'list-item'
+						: 'none'
+			}"
+		>
+			<img
+				appLazyImage
+				[src]="img.path"
+				alt=""
+				(click)="openImg(img)"
+				loading="lazy"
+			/>
+		</li>
+	</ul>
+</div>
+
+<div
+	[@inOutAnimation]
+	*ngIf="showImg"
+	class="image-detail"
+	(click)="showImg = !showImg"
+>
+	<div class="image-item">
+		<img [src]="selectedImg.url_original" />
+		<div class="description">
+			{{ selectedImg.alt }}
+		</div>
+	</div>
+</div>

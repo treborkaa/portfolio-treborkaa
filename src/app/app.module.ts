@@ -9,9 +9,14 @@ import { GaleryComponent } from './components/galery/galery.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { HomeComponent } from './components/home/home.component';
+import { BurgerModalComponent } from './components/burger-modal/burger-modal.component';
 
 import { DeviceManagerService } from './services/device-manager.service';
-import { BurgerModalComponent } from './components/burger-modal/burger-modal.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { LazyImageDirective } from './directives/lazy-image.directive';
 
 @NgModule({
 	declarations: [
@@ -22,9 +27,16 @@ import { BurgerModalComponent } from './components/burger-modal/burger-modal.com
 		AboutComponent,
 		ContactComponent,
 		HomeComponent,
-  BurgerModalComponent,
+		BurgerModalComponent,
+		LazyImageDirective,
 	],
-	imports: [BrowserModule, AppRoutingModule],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		BrowserAnimationsModule,
+		HttpClientModule,
+		FormsModule,
+	],
 	providers: [DeviceManagerService],
 	bootstrap: [AppComponent],
 	// schemas: [NO_ERRORS_SCHEMA]

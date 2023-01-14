@@ -27,7 +27,7 @@
 		width: 100%;
 		text-align: center;
 		color: black;
-		transition: color 0.1s ease-out;
+		// transition: color 0.1s ease-out;
 
 		&.active {
 			color: orange;
@@ -46,11 +46,11 @@
 .burger-modal-displayed {
 	opacity: 1;
 	visibility: visible;
-	transition: opacity 0.5s;
+	// transition: opacity 0.5s;
 }
 
 .burger-modal-disabled {
 	opacity: 0;
 	visibility: hidden;
-	transition: opacity 0.5s, visibility 0s 0.5s;
+	// transition: opacity 0.5s, visibility 0s 0.5s;
 }
