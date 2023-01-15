@@ -1,0 +1,29 @@
+<div [@inOutAnimation] class="image-detail">
+	<div class="close-button" (click)="closeDetail()">
+		<div class="close-div">
+			<mat-icon>close</mat-icon>
+		</div>
+	</div>
+	<div class="image-item" id="img-content">
+		<img
+			class="img-selected unloaded"
+			[src]="isLoadImg ? selectedImg.path : selectedImg.url_original"
+			(loaded)="imgLoaded()"
+			id="img-popup"
+		/>
+		<div *ngIf="selectedImg.description" class="description">
+			<span class="text">{{ selectedImg.description }}</span>
+		</div>
+	</div>
+	<div class="list-img" id="list-img">
+		<div class="arrow left" (click)="scrollInList('left')">
+			<mat-icon>chevron_left</mat-icon>
+		</div>
+		<div *ngFor="let img of imagesList" class="iterate-img">
+			<img [src]="img.path" (click)="setSelectedImg(img)" />
+		</div>
+		<div class="arrow right" (click)="scrollInList('right')">
+			<mat-icon>chevron_right</mat-icon>
+		</div>
+	</div>
+</div>

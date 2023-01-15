@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { DeviceManagerService } from 'src/app/services/device-manager.service';
 
@@ -8,6 +8,9 @@ import { DeviceManagerService } from 'src/app/services/device-manager.service';
 	styleUrls: ['./burger-modal.component.scss'],
 })
 export class BurgerModalComponent {
+	@Output()
+	public closeMenuEvent: EventEmitter<string> = new EventEmitter();
+
 	public activeRoute: string = '';
 
 	constructor(
@@ -20,6 +23,7 @@ export class BurgerModalComponent {
 	}
 
 	navigateTo(route: string) {
+		this.closeMenuEvent.emit(route);
 		this.activeRoute = route;
 		this.router.navigate([route]);
 	}
