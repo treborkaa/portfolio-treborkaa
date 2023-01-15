@@ -9,7 +9,7 @@ import { GaleryComponent } from './components/galery/galery.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { HomeComponent } from './components/home/home.component';
-import { BurgerModalComponent } from './components/burger-modal/burger-modal.component';
+import { BurgerModalComponent } from './components/navbar/burger-modal/burger-modal.component';
 
 import { DeviceManagerService } from './services/device-manager.service';
 
@@ -17,6 +17,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { LazyImageDirective } from './directives/lazy-image.directive';
+import { ImgLoadedDirective } from './directives/img-loaded.directive';
+import { PopupLoadedDirective } from './directives/popup-loaded.directive';
+import { DetailImageComponent } from './components/galery/detail-image/detail-image.component';
+
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
 	declarations: [
@@ -29,6 +34,9 @@ import { LazyImageDirective } from './directives/lazy-image.directive';
 		HomeComponent,
 		BurgerModalComponent,
 		LazyImageDirective,
+		ImgLoadedDirective,
+		PopupLoadedDirective,
+		DetailImageComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -36,6 +44,7 @@ import { LazyImageDirective } from './directives/lazy-image.directive';
 		BrowserAnimationsModule,
 		HttpClientModule,
 		FormsModule,
+		MatIconModule,
 	],
 	providers: [DeviceManagerService],
 	bootstrap: [AppComponent],

@@ -1,0 +1,141 @@
+.fake-img {
+	width: 90%;
+	height: 90%;
+	align-self: center;
+
+	#loading {
+		visibility: visible;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 90%;
+
+		.image-on-load {
+			object-fit: contain;
+			height: -webkit-fill-available;
+			align-self: center;
+			border-radius: 5px;
+		}
+	}
+}
+
+.image-detail {
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+	align-items: center;
+	justify-content: space-around;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	top: 0;
+	left: 0;
+	z-index: 10;
+
+	.close-button {
+		height: 4em;
+		width: 4em;
+		background-color: rgba(0, 0, 0, 0.6);
+		position: absolute;
+		border-radius: 50%;
+		transition: background-color 0.1s;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: white;
+		top: 2em;
+		right: 2em;
+		z-index: 12;
+		transition: background-color 0.1s;
+
+		.close-div {
+			display: flex;
+		}
+
+		&:hover {
+			background-color: rgba(0, 0, 0, 0.9);
+			transition: background-color 0.5s;
+		}
+	}
+
+	.image-item {
+		width: 100%;
+		height: 80%;
+		flex-direction: column;
+		display: flex;
+		text-align-last: center;
+		background-color: #212124;
+		border-radius: 5px;
+		padding: 1em;
+		font-family: "Lemon Milk";
+		transition: height 2s;
+		z-index: 11;
+
+		.img-selected {
+			height: 90%;
+			width: 90%;
+			object-fit: contain;
+			align-self: center;
+		}
+
+		.description {
+			margin-top: auto;
+			width: 80%;
+			align-self: center;
+			background-color: #414147;
+			color: white;
+			border-radius: 2px;
+			padding: 1em;
+		}
+	}
+
+	.list-img::-webkit-scrollbar {
+		width: 0;
+		background: transparent;
+	}
+
+	.list-img {
+		display: flex;
+		flex-direction: row;
+		height: 10em;
+		width: 100%;
+		transition: all 2s;
+		overflow: auto hidden;
+
+		.arrow {
+			bottom: 4em;
+			height: 4em;
+			width: 4em;
+			background-color: rgba(0, 0, 0, 0.6);
+			position: absolute;
+			border-radius: 50%;
+			transition: background-color 0.1s;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+
+			&.left {
+				left: 1em;
+			}
+
+			&.right {
+				right: 1em;
+			}
+
+			&:hover {
+				background-color: rgba(0, 0, 0, 0.9);
+				transition: background-color 0.5s;
+			}
+		}
+
+		.iterate-img {
+			height: 100%;
+			padding: 0 5px;
+		}
+
+		img {
+			height: 100%;
+		}
+	}
+}
