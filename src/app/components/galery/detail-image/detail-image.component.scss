@@ -60,82 +60,83 @@
 
 	.image-item {
 		width: 100%;
-		height: 80%;
+		height: 100%;
 		flex-direction: column;
 		display: flex;
 		text-align-last: center;
 		background-color: #212124;
-		border-radius: 5px;
-		padding: 1em;
 		font-family: "Lemon Milk";
 		transition: height 2s;
 		z-index: 11;
+		justify-content: center;
 
-		.img-selected {
-			height: 90%;
-			width: 90%;
-			object-fit: contain;
-			align-self: center;
+		.arrow {
+			height: 100%;
+    		width: 4em;
+			position: absolute;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			z-index: 10;
+
+			&.left {
+				left: 0;
+			}
+
+			&.right {
+				right: 0;
+			}
+
+			.switch-icon {
+				font-size: 4em;
+				height: 1em;
+				width: 4em;
+			}
 		}
 
-		.description {
-			margin-top: auto;
-			width: 80%;
-			align-self: center;
-			background-color: #414147;
-			color: white;
-			border-radius: 2px;
-			padding: 1em;
+		.content-img {
+			display: flex;
+			height: 100%;
+			position: relative;
+			overflow: hidden;
+			width: 100%;
+			text-align: center;
+			justify-content: center;
+
+			.img-selected {
+				height: 90%;
+				width: 90%;
+				object-fit: contain;
+				align-self: center;
+			}
+
+			.description {
+				display: flex;
+				height: 0%;
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				background: rgba(0, 0, 0, 0.72);
+				color: #fff;
+				transition: height 0.1s;
+
+				.text {
+					padding: 1em;
+				}
+			}
+		}
+
+		.content-img:hover .description {
+			height: 50%;
+			transition: height 0.3s;
 		}
 	}
 
 	.list-img::-webkit-scrollbar {
 		width: 0;
+		height: 0;
 		background: transparent;
-	}
-
-	.list-img {
-		display: flex;
-		flex-direction: row;
-		height: 13em;
-		width: 100%;
-		transition: all 2s;
-		overflow: auto hidden;
-
-		.arrow {
-			bottom: 3.5em;
-			height: 4em;
-			width: 4em;
-			background-color: rgba(0, 0, 0, 0.6);
-			position: absolute;
-			border-radius: 50%;
-			transition: background-color 0.1s;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			color: white;
-
-			&.left {
-				left: 1em;
-			}
-
-			&.right {
-				right: 1em;
-			}
-
-			&:hover {
-				background-color: rgba(0, 0, 0, 0.9);
-				transition: background-color 0.5s;
-			}
-		}
-
-		.iterate-img {
-			height: 100%;
-			padding: 0 5px;
-		}
-
-		img {
-			height: 100%;
-		}
 	}
 }

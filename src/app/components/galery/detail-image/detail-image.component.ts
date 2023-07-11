@@ -1,6 +1,7 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ImageDto } from 'src/app/models/images-list.model';
+import { ImageLocalDto } from 'src/app/models/images-list.model';
+import { DeviceManagerService } from 'src/app/services/device-manager.service';
 
 @Component({
 	selector: 'app-detail-image',
@@ -20,11 +21,13 @@ import { ImageDto } from 'src/app/models/images-list.model';
 	],
 })
 export class DetailImageComponent implements OnInit {
-	@Input()
-	imagesList: ImageDto[] = [];
+	scrollWidth = 600;
 
 	@Input()
-	selectedImg: ImageDto = this.imagesList[0];
+	imagesList: ImageLocalDto[] = [];
+
+	@Input()
+	selectedImg: ImageLocalDto = this.imagesList[0];
 
 	@Output()
 	closeDetailEmitter: EventEmitter<boolean> = new EventEmitter();
@@ -33,9 +36,11 @@ export class DetailImageComponent implements OnInit {
 
 	public isLoaded = false;
 
-	constructor() {}
+	constructor(public device: DeviceManagerService) {}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+		console.log(this.device.device);
+	}
 
 	imgLoaded() {
 		this.isLoadImg = false;
@@ -45,7 +50,7 @@ export class DetailImageComponent implements OnInit {
 		this.closeDetailEmitter.emit(true);
 	}
 
-	setSelectedImg(img: ImageDto) {
+	setSelectedImg(img: ImageLocalDto) {
 		this.selectedImg = img;
 		this.isLoadImg = true;
 	}
@@ -53,19 +58,26 @@ export class DetailImageComponent implements OnInit {
 	scrollInList(direction: string) {
 		let listImg = document.getElementById('list-img') as HTMLDivElement;
 
-		if (listImg) {
+		let index: number = this.imagesList.findIndex(img => img.link === this.selectedImg.link);
+		let maxIndex = this.imagesList.length - 1;
+		console.log(direction)
+
+		// if (listImg) {
 			if (direction === 'left') {
-				listImg.style.overflowX = 'scroll';
-				listImg.scrollTo({
-					left: listImg.scrollLeft - 600,
-					behavior: 'smooth',
-				});
+				console.log(index - 1 < 0 ? maxIndex : index - 1);
+				this.selectedImg = this.imagesList[index - 1 < 0 ? maxIndex : index - 1];
+				// listImg.style.overflowX = 'scroll';
+				// listImg.scrollTo({
+				// 	left: listImg.scrollLeft - window.innerWidth,
+				// 	behavior: 'smooth',
+				// });
 			} else {
-				listImg.scrollTo({
-					left: listImg.scrollLeft + 600,
-					behavior: 'smooth',
-				});
+				this.selectedImg = this.imagesList[index + 1 > maxIndex ? 0 : index + 1];
+				// listImg.scrollTo({
+				// 	left: listImg.scrollLeft + window.innerWidth,
+				// 	behavior: 'smooth',
+				// });
 			}
-		}
+		// }
 	}
 }

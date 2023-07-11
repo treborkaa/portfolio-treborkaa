@@ -1,33 +1,6 @@
-<select [(ngModel)]="categoryTag" (change)="sortList()">
-	<option
-		*ngFor="let category of categoryList"
-		[selected]="category.tag === categoryTag"
-		[ngValue]="category.tag"
-	>
-		{{ category.label }}
-	</option>
-</select>
 <div *ngIf="!isLoaded" id="loading"><span class="loader"></span></div>
-<div *ngIf="isLoaded" class="container">
-	<ul
-		class="image-gallery mdc-image-list mdc-image-list--masonry my-masonry-image-list"
-	>
-		<li
-			[@enterImgAnimation]
-			*ngFor="let img of formattedImageList"
-			class="mdc-image-list__item"
-		>
-			<div style="height: 100%">
-				<img
-					appLazyImage
-					class="mdc-image-list__image"
-					[src]="img.path"
-					(click)="openImg(img)"
-					loading="lazy"
-				/>
-			</div>
-		</li>
-	</ul>
+<div *ngIf="isLoaded" class="gallery-grid">
+	<img *ngFor="let img of imgList" (click)="openImg(img)" [src]="img.link" alt="Gallery Image" class="gallery-image">
 </div>
 <app-detail-image
 	*ngIf="openDetail"

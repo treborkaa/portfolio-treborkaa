@@ -3,6 +3,11 @@
 
 .my-masonry-image-list {
 	@include image-list.masonry-columns(var(--nbOfLists));
+	column-gap: 2px;
+
+	.mdc-image-list__item {
+		margin-bottom: 2px;
+	}
 }
 
 #loading {

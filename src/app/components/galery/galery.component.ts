@@ -1,6 +1,6 @@
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Component, HostBinding, HostListener, OnInit } from '@angular/core';
-import { ImageDto } from 'src/app/models/images-list.model';
+import { CImgList, ImageDto, ImageLocalDto } from 'src/app/models/images-list.model';
 import { FlickrApiService } from 'src/app/services/flickr-api.service';
 
 type Category = { tag: string; label: string };
@@ -22,10 +22,10 @@ export class GaleryComponent implements OnInit {
 	@HostBinding('style.--nbOfLists')
 	public nbOfLists: number = 0;
 
-	public formattedImageList: ImageDto[] = [];
-	public originalImageList: ImageDto[] = [];
+	public formattedImageList: ImageLocalDto[] = [];
+	public originalImageList: ImageLocalDto[] = [];
 	public openDetail: boolean = false;
-	public selectedImg: ImageDto = this.formattedImageList[0];
+	public selectedImg: ImageLocalDto = this.formattedImageList[0];
 	public categoryList: Category[] = [
 		{ tag: '', label: 'Tout voir' },
 		{ tag: 'animal', label: 'Animalier' },
@@ -44,36 +44,48 @@ export class GaleryComponent implements OnInit {
 
 	public isLoaded = false;
 
+	public imgList: ImageLocalDto[] = CImgList;
+
 	constructor(private flickrApiService: FlickrApiService) {}
 
 	ngOnInit(): void {
+
+		this.imgList = this.imgList
+		.map(value => ({ value, sort: Math.random() }))
+		.sort((a, b) => a.sort - b.sort)
+		.map(({ value }) => value)
+
 		this.setNbOfLists();
-		this.flickrApiService.flickrImagesList.subscribe((data) => {
-			data.forEach((img) => {
-				let imgUrl = this.flickrApiService.getImgUrl(img);
-				this.formattedImageList.push({
-					path: imgUrl,
-					filename: '',
-					alt: '',
-					tags: img.tags.split(' '),
-					url_original: img.url_o,
-					description: img.description._content,
-				});
-				this.originalImageList = this.formattedImageList;
-				if (this.selectedCategory.tag !== '') {
-					this.formattedImageList = this.formattedImageList.filter(
-						(filterImg) => filterImg.tags.includes(this.selectedCategory.tag)
-					);
-				}
-				this.isLoaded = true;
-			});
-			this.originalImageList = this.formattedImageList;
-			if (this.selectedCategory.tag !== '') {
-				this.formattedImageList = this.formattedImageList.filter((filterImg) =>
-					filterImg.tags.includes(this.selectedCategory.tag)
-				);
-			}
-		});
+		this.formattedImageList = this.imgList;
+		this.originalImageList = this.imgList;
+		this.isLoaded = true;
+		// this.flickrApiService.flickrImagesList.subscribe((data) => {
+		// 	data.forEach((img) => {
+		// 		let imgUrl = this.flickrApiService.getImgUrl(img);
+		// 		this.formattedImageList.push({
+		// 			link: imgUrl,
+		// 			// path: imgUrl,
+		// 			// filename: '',
+		// 			// alt: '',
+		// 			// tags: img.tags.split(' '),
+		// 			// url_original: img.url_o,
+		// 			// description: img.description._content,
+		// 		});
+		// 		this.originalImageList = this.formattedImageList;
+		// 		// if (this.selectedCategory.tag !== '') {
+		// 		// 	this.formattedImageList = this.formattedImageList.filter(
+		// 		// 		(filterImg) => filterImg.tags.includes(this.selectedCategory.tag)
+		// 		// 	);
+		// 		// }
+		// 		this.isLoaded = true;
+		// 	});
+		// 	this.originalImageList = this.formattedImageList;
+		// 	// if (this.selectedCategory.tag !== '') {
+		// 	// 	this.formattedImageList = this.formattedImageList.filter((filterImg) =>
+		// 	// 		filterImg.tags.includes(this.selectedCategory.tag)
+		// 	// 	);
+		// 	// }
+		// });
 	}
 
 	setNbOfLists() {
@@ -83,14 +95,8 @@ export class GaleryComponent implements OnInit {
 			this.nbOfLists = 2;
 		} else if (window.innerWidth < 1000) {
 			this.nbOfLists = 3;
-		} else if (window.innerWidth < 1200) {
-			this.nbOfLists = 4;
-		} else if (window.innerWidth < 1400) {
-			this.nbOfLists = 5;
-		} else if (window.innerWidth < 1600) {
-			this.nbOfLists = 6;
 		} else {
-			this.nbOfLists = 7;
+			this.nbOfLists = 4;
 		}
 	}
 
@@ -108,9 +114,9 @@ export class GaleryComponent implements OnInit {
 		if (this.selectedCategory.tag === '') {
 			return;
 		}
-		this.formattedImageList = this.formattedImageList.filter((filterImg) =>
-			filterImg.tags.includes(this.selectedCategory.tag)
-		);
+		// this.formattedImageList = this.formattedImageList.filter((filterImg) =>
+		// 	filterImg.tags.includes(this.selectedCategory.tag)
+		// );
 	}
 
 	closeDetail() {
