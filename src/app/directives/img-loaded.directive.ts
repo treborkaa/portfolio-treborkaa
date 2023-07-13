@@ -19,11 +19,8 @@ export class ImgLoadedDirective {
 	}
 
 	constructor(private elRef: ElementRef<HTMLImageElement>) {
-		console.log('IMG LOADED');
 		if (this.elRef.nativeElement.complete) {
-			// console.log(this.elRef.nativeElement.loading, 'df sdf sssssd fsdf ');
 			this.loaded.emit();
 		}
-		// console.log(this.elRef.nativeElement.loading, 'df sdf sd fsdf ');
 	}
 }

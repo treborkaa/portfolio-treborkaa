@@ -1,10 +1,13 @@
 <div *ngIf="!isLoaded" id="loading"><span class="loader"></span></div>
-<div *ngIf="isLoaded" class="gallery-grid">
-	<img *ngFor="let img of imgList" (click)="openImg(img)" [src]="img.link" alt="Gallery Image" class="gallery-image">
+<div
+	*ngIf="isLoaded"
+	class="gallery-grid"
+	[ngClass]="{'mobile': device === 'mobile', 'desktop': device === 'desktop'}">
+	<img *ngFor="let img of imgList" (click)="openImg(img)" [src]="img.link" alt="Gallery Image" class="gallery-image" loading="lazy">
 </div>
 <app-detail-image
 	*ngIf="openDetail"
-	[imagesList]="formattedImageList"
+	[imagesList]="imgList"
 	[selectedImg]="selectedImg"
 	(closeDetailEmitter)="closeDetail()"
 ></app-detail-image>

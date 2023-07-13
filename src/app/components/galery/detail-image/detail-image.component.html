@@ -5,7 +5,7 @@
 		</div>
 	</div>
 	<div class="image-item" id="img-content">
-		<div class="arrow left" (click)="scrollInList('left')">
+		<div class="arrow left" (click)="nextImg('left')">
 			<mat-icon class="switch-icon">chevron_left</mat-icon>
 		</div>
 		<div class="content-img">
@@ -19,7 +19,7 @@
 				<span class="text">{{ selectedImg.description }}</span>
 			</div>
 		</div>
-		<div class="arrow right" (click)="scrollInList('right')">
+		<div class="arrow right" (click)="nextImg('right')">
 			<mat-icon class="switch-icon">chevron_right</mat-icon>
 		</div>
 	</div>

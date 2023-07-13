@@ -1,5 +1,5 @@
 import { trigger, transition, style, animate } from '@angular/animations';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, OnDestroy, Output } from '@angular/core';
 import { ImageLocalDto } from 'src/app/models/images-list.model';
 import { DeviceManagerService } from 'src/app/services/device-manager.service';
 
@@ -20,9 +20,7 @@ import { DeviceManagerService } from 'src/app/services/device-manager.service';
 		]),
 	],
 })
-export class DetailImageComponent implements OnInit {
-	scrollWidth = 600;
-
+export class DetailImageComponent implements OnInit, OnDestroy {
 	@Input()
 	imagesList: ImageLocalDto[] = [];
 
@@ -39,7 +37,11 @@ export class DetailImageComponent implements OnInit {
 	constructor(public device: DeviceManagerService) {}
 
 	ngOnInit(): void {
-		console.log(this.device.device);
+		document.body.style.overflow = 'hidden';
+	}
+
+	ngOnDestroy(): void {
+		document.body.style.removeProperty('overflow');
 	}
 
 	imgLoaded() {
@@ -55,29 +57,14 @@ export class DetailImageComponent implements OnInit {
 		this.isLoadImg = true;
 	}
 
-	scrollInList(direction: string) {
+	nextImg(direction: string) {
 		let listImg = document.getElementById('list-img') as HTMLDivElement;
-
 		let index: number = this.imagesList.findIndex(img => img.link === this.selectedImg.link);
 		let maxIndex = this.imagesList.length - 1;
-		console.log(direction)
-
-		// if (listImg) {
-			if (direction === 'left') {
-				console.log(index - 1 < 0 ? maxIndex : index - 1);
-				this.selectedImg = this.imagesList[index - 1 < 0 ? maxIndex : index - 1];
-				// listImg.style.overflowX = 'scroll';
-				// listImg.scrollTo({
-				// 	left: listImg.scrollLeft - window.innerWidth,
-				// 	behavior: 'smooth',
-				// });
-			} else {
-				this.selectedImg = this.imagesList[index + 1 > maxIndex ? 0 : index + 1];
-				// listImg.scrollTo({
-				// 	left: listImg.scrollLeft + window.innerWidth,
-				// 	behavior: 'smooth',
-				// });
-			}
-		// }
+		
+		this.selectedImg = direction === 'left' ?
+			this.imagesList[index - 1 < 0 ? maxIndex : index - 1] :
+			this.selectedImg = this.imagesList[index + 1 > maxIndex ? 0 : index + 1];
+	
 	}
 }
